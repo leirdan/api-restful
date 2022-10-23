@@ -18,9 +18,9 @@ Existem seis obrigações (constraints) no total.
 - _Client-Server_: **O cliente e servidor devem estar separados**. Isso significa dizer que a parte front e back-end estão divididas e os dados estão guardados no servidor, não na interface.
 - _Stateless_: **Cada requisição HTTP deve enviar todos os dados completos ao servidor para o cliente ser respondido corretamente**. Ou seja, a Request deve conter todas as informações necessárias para gerar uma Response adequada. Um exemplo prático disso é não armazenar dados de usuário no servidor, pois isso geraria um estado; a maneira "correta" de se fazer isso seria o usuário logar e iniciar uma nova sessão toda vez que for acessar a API.
 - _Cacheable_: ** Todas as Responses devem informar se suas informações serão ou não cacheáveis **.
-- _Layered System_: ** O cliente acessa um endpoint sem precisar saber do caminho percorrido e da sua complexidade **; um endpoint nada mais é que um endereço final da API.
-- _Uniform Interface_: ** Padronizar o formato das suas informações **.
-- _Code on Demand (opcional)_: ** Possibilidade da API mandar códigos para o cliente e executá-los lá, como código Javascript **.
+- _Layered System_: **O cliente acessa um endpoint sem precisar saber do caminho percorrido e da sua complexidade**; um endpoint nada mais é que um endereço final da API.
+- _Uniform Interface_: **Padronizar o formato das suas informações**.
+- _Code on Demand (opcional)_: **Possibilidade da API mandar códigos para o cliente e executá-los lá, como código Javascript**.
 
 ## 3. RESTFUL
 
