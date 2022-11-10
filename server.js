@@ -7,6 +7,7 @@ app.use(express.json());
 app.get("/songs", (req, res) => {
   res.status(200).json(data);
 });
+
 app.get("/songs/:id", (req, res) => {
   const { id } = req.params;
   const song = data.find((song) => song.id == id);
@@ -19,6 +20,7 @@ app.get("/songs/:id", (req, res) => {
 });
 
 app.post("songs", (req, res) => {});
+
 app.put("songs/:id", (req, res) => {
   const { id } = req.params;
   const song = data.find((song) => song.id == id);
@@ -33,6 +35,7 @@ app.put("songs/:id", (req, res) => {
 
   res.json(song);
 });
+
 app.delete("/songs/:id", (req, res) => {
   const { id } = req.params;
   const songsFiltered = data.filter((songs) => songs.id != id);
