@@ -1,5 +1,6 @@
 import { data } from "../data";
 import { Request, Response } from "express";
+import { Song } from "../interface/Song";
 
 export class SongController {
 	public index(req: Request, res: Response): Response {
@@ -31,7 +32,7 @@ export class SongController {
 		if (newSong.title == "") {
 			return res.status(403).json({ message: `insert the song's name!` });
 		}
-		if (newSong.id == "" || newSong.id.includes("@") || newSong.id.includes("#")) {
+		if (newSong.id == undefined) {
 			return res.status(403).json({ message: `invalid ID!` });
 		}
 		data.push(newSong);
@@ -39,8 +40,8 @@ export class SongController {
 	}
 
 	public updateSong(req: Request, res: Response): Response {
-		const { id } = req.params;
-		const song: any = data.find((song: any) => song.id == id);
+		const { id } = req.body;
+		const song = data.find((song: any) => song.id == id) as Song;
 		if (!song) {
 			return res.status(404).json({ message: `this song doesn't exist` });
 		} else {

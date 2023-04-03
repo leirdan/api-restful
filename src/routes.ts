@@ -10,7 +10,7 @@ router.get("/songs/:id", songCtrl.getOneSong);
 
 router.post("/songs", songCtrl.insertSong);
 
-router.put("/songs/:id", songCtrl.updateSong);
+router.put("/songs", songCtrl.updateSong);
 
 router.delete("/songs/:id", songCtrl.deleteSong);
 

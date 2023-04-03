@@ -16,7 +16,7 @@ describe("songs controller tests", () => {
 	});
 	it("deve criar uma nova música", () => {
 		mockRequest.body = {
-			id: "1",
+			id: 1,
 			title: "anything like me",
 			duration: "3:19",
 			genre: "metal",
@@ -46,5 +46,18 @@ describe("songs controller tests", () => {
 		songCtrl.insertSong(mockRequest, mockResponse);
 		expect(mockResponse.state.status).toBe(403);
 		expect(mockResponse.state.json).toMatchObject({ message: `invalid ID!` });
+	});
+
+	it("deve atualizar dados de música", () => {
+		mockRequest.body = {
+			id: "1",
+			title: "1x1 feat Nova Twins",
+			composer: "bring me the horizon",
+			duration: "4:02",
+			genre: "metal"
+		};
+		songCtrl.updateSong(mockRequest, mockResponse);
+		expect(mockResponse.state.status).toBe(201);
+		expect(mockResponse.state.json).toMatchObject({ message: "song updated!" });
 	});
 });
