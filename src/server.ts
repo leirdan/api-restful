@@ -1,9 +1,9 @@
 import express from "express";
-import routes from "./src/routes.js";
+import { router } from "./routes";
 const app = express();
 
 app.use(express.json());
-app.use(routes);
+app.use(router);
 
 app.listen(8002, () => {
 	console.log("Servidor aberto.");
