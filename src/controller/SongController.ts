@@ -27,19 +27,15 @@ export class SongController {
 			composer: composer,
 			duration: duration,
 			genre: genre
-		};
-		if (newSong.title.length === 0 || newSong.title == undefined) {
+		} as Song;
+		if (newSong.title == "") {
 			return res.status(403).json({ message: `insert the song's name!` });
 		}
-		if (newSong.id.includes(`@!#$%&*()\"|`)) {
+		if (newSong.id == "" || newSong.id.includes("@") || newSong.id.includes("#")) {
 			return res.status(403).json({ message: `invalid ID!` });
 		}
-		try {
-			data.push(newSong);
-			return res.status(201).json({ message: "new song was just added to our database!" });
-		} catch (err) {
-			return res.status(500).json({ message: err });
-		}
+		data.push(newSong);
+		return res.status(201).json({ message: "new song was just added to our database!" });
 	}
 
 	public updateSong(req: Request, res: Response): Response {
