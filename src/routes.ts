@@ -1,17 +1,17 @@
 import { Router } from "express";
-import { SongController } from "./controller/SongController";
+import { AlbumController } from "./controller/AlbumController";
 
 const router = Router();
-const songCtrl = new SongController();
+const albumCtrl = new AlbumController();
 
-router.get("/songs", songCtrl.index);
+router.get("/albums", albumCtrl.index);
 
-router.get("/songs/:id", songCtrl.getOneSong);
+router.get("/albums/:id", albumCtrl.getOneAlbum);
 
-router.post("/songs", songCtrl.insertSong);
+router.post("/albums", albumCtrl.insertAlbum);
 
-router.put("/songs", songCtrl.updateSong);
+router.put("/albums", albumCtrl.updateAlbum);
 
-router.delete("/songs/:id", songCtrl.deleteSong);
+router.delete("/albums/:id", albumCtrl.deleteAlbum);
 
 export { router };

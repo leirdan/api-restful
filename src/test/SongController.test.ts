@@ -1,63 +1,62 @@
-import { json, Request, Response } from "express";
-import { SongController } from "../controller/SongController";
-import { Song } from "../interface/Song";
+import { Request } from "express";
+import { AlbumController } from "../controller/AlbumController";
 import { data } from "../data";
+import { Album } from "../interface/Album";
 import { makeMockResponse } from "../mock/mockResponse";
 
-describe("songs controller tests", () => {
-	const songCtrl = new SongController();
+describe("album controller tests", () => {
+	const albumCtrl = new AlbumController();
 	// os mocks representam objetos; em cenários de testes, é aceitável utilizá-los para não criar objetos imensos como os da Request e Response
 	const mockRequest = {} as Request;
 	const mockResponse = makeMockResponse();
-	it("deve retornar todas as musicas", () => {
-		songCtrl.index(mockRequest, mockResponse);
+	it("Deve retornar todos os álbuns", () => {
+		albumCtrl.index(mockRequest, mockResponse);
 		expect(mockResponse.state.status).toBe(200);
 		expect(mockResponse.state.json).toHaveLength(data.length);
 	});
-	it("deve criar uma nova música", () => {
+	it("Deve criar um novo álbum", () => {
 		mockRequest.body = {
 			id: 1,
 			title: "anything like me",
-			duration: "3:19",
-			genre: "metal",
-			composer: "poppy"
-		} as Song;
-		songCtrl.insertSong(mockRequest, mockResponse);
+			composer: "poppy",
+			image: "https://blablabla"
+		} as Album;
+		albumCtrl.insertAlbum(mockRequest, mockResponse);
 		expect(mockResponse.state.status).toBe(201);
 		expect(mockResponse.state.json).toMatchObject({
-			message: "new song was just added to our database!"
+			message: "new album was just added to our database!"
 		});
 	});
 
-	it("não deve criar nova música com um nome inválido", () => {
+	it("Não deve criar novo álbum com um nome inválido", () => {
 		mockRequest.body = {
 			id: "1",
 			title: ""
 		};
-		songCtrl.insertSong(mockRequest, mockResponse);
+		albumCtrl.insertAlbum(mockRequest, mockResponse);
 		expect(mockResponse.state.status).toBe(403);
-		expect(mockResponse.state.json).toMatchObject({ message: `insert the song's name!` });
+		expect(mockResponse.state.json).toMatchObject({ message: `insert the album's name!` });
 	});
-	it("não deve criar nova música com ID inválido", () => {
+	it("Não deve criar novo álbum com ID inválido", () => {
 		mockRequest.body = {
 			id: "#sdas",
-			title: "bloodmoney"
+			title: "bloodmoney",
+			image: "https://outofsight"
 		};
-		songCtrl.insertSong(mockRequest, mockResponse);
+		albumCtrl.insertAlbum(mockRequest, mockResponse);
 		expect(mockResponse.state.status).toBe(403);
 		expect(mockResponse.state.json).toMatchObject({ message: `invalid ID!` });
 	});
 
-	it("deve atualizar dados de música", () => {
+	it("Deve atualizar dados de um álbum", () => {
 		mockRequest.body = {
 			id: "1",
 			title: "1x1 feat Nova Twins",
 			composer: "bring me the horizon",
-			duration: "4:02",
-			genre: "metal"
+			image: "https://rightwhereyouleftme"
 		};
-		songCtrl.updateSong(mockRequest, mockResponse);
+		albumCtrl.updateAlbum(mockRequest, mockResponse);
 		expect(mockResponse.state.status).toBe(201);
-		expect(mockResponse.state.json).toMatchObject({ message: "song updated!" });
+		expect(mockResponse.state.json).toMatchObject({ message: "album updated!" });
 	});
 });
