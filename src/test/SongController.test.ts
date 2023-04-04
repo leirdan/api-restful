@@ -59,4 +59,11 @@ describe("album controller tests", () => {
 		expect(mockResponse.state.status).toBe(201);
 		expect(mockResponse.state.json).toMatchObject({ message: "album updated!" });
 	});
+
+	it("Deve excluir um álbum", () => {
+		mockRequest.body = { id: 1 };
+		albumCtrl.deleteAlbum(mockRequest, mockResponse);
+		expect(mockResponse.state.status).toBe(200);
+		expect(mockResponse.state.json).toMatchObject({ message: `album was just deleted!` });
+	});
 });

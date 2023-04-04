@@ -53,10 +53,10 @@ export class AlbumController {
 	}
 
 	public deleteAlbum(req: Request, res: Response): Response {
-		const { id } = req.params;
+		const { id } = req.body;
 		try {
-			const song: any = data.find((song: any) => song.id === id);
-			const index = data.indexOf(song);
+			const album = data.find((album: any) => album.id === id) as Album;
+			const index = data.indexOf(album);
 			data.splice(index, 1);
 			return res.status(200).json({ message: `album was just deleted!` });
 		} catch (err) {
